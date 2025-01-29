@@ -25,7 +25,7 @@ public class Vehicle {
     private String vehicleDescription;
     private String vehiclePhotoUrl;
 
-    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Booking> bookings =new ArrayList<>();
 
     @Override
@@ -38,7 +38,6 @@ public class Vehicle {
                 ", vehicleSeats='" + vehicleSeats + '\'' +
                 ", vehicleDescription='" + vehicleDescription + '\'' +
                 ", vehiclePhotoUrl='" + vehiclePhotoUrl + '\'' +
-                ", bookings=" + bookings +
                 '}';
     }
 }

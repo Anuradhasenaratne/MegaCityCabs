@@ -17,22 +17,26 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
-    @NotBlank(message = "Email is Requried")
+    @NotBlank(message = "Email is Required")
     @Column(unique = true)
     private String email;
-    @NotBlank(message = "Password is Requried")
+
+    @NotBlank(message = "Password is Required")
     private String password;
-    @NotBlank(message = "Name is Requried")
+
+    @NotBlank(message = "Name is Required")
     private String name;
-    @NotBlank(message = "Phone is Requried")
+
+    @NotBlank(message = "Phone is Required")
     private String phoneNumber;
+
     private String nic;
     private String role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Booking> bookings= new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Booking> bookings = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -62,5 +66,11 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    // Add this method to implement the getPassword() from UserDetails interface
+    @Override
+    public String getPassword() {
+        return password;
     }
 }
