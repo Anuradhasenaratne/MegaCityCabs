@@ -32,6 +32,7 @@ public class User implements UserDetails {
     @NotBlank(message = "Phone is Required")
     private String phoneNumber;
 
+    @NotBlank(message = "nic is Required")
     private String nic;
     private String role;
 
