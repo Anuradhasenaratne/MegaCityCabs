@@ -1,6 +1,7 @@
 package com.raavanacoding.mcc.security;
 
 
+import com.raavanacoding.mcc.service.CustomUserDetailsService;
 import com.raavanacoding.mcc.utils.JWTUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -14,18 +15,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+@Service
 @Component
 public class JWTAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private JWTUtils jwtUtils;
 
-
-    private CachingUserDetailsService cachingUserDetailsService;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
 
     @Override
@@ -42,7 +45,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         jwtToken = authHeader.substring(7);
         userEmail = jwtUtils.extractUsername(jwtToken);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = cachingUserDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(userEmail);
             if(jwtUtils.isValidateToken(jwtToken, userDetails)) {
                 SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

@@ -38,7 +38,7 @@ public class AwsS3Service {
             BasicAWSCredentials awsCredentials = new BasicAWSCredentials(awsS3AccessKey, awsS3SecretKey);
             AmazonS3 S3Client = AmazonS3ClientBuilder.standard()
                     .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                    .withRegion(Regions.EU_WEST_2)
+                    .withRegion(Regions.EU_NORTH_1)
                     .build();
 
             InputStream inputStream = photo.getInputStream();

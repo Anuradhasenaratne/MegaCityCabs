@@ -24,6 +24,7 @@ public class Booking {
     private LocalDate checkOutDate;
 
 
+
     private String pickUpLocation;
     private String dropOffLocation;
 
