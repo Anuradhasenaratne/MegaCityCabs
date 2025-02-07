@@ -84,7 +84,7 @@ public class BookingService implements IBookingService {
 
 
            Booking booking=bookingRepository.findByBookingConfirmationCode(confirmationCode).orElseThrow(()->new OurException("Booking not found"));
-            BookingDTO bookingDTO=Utils.mapBookingEntityToBookingDTO(booking);
+            BookingDTO bookingDTO=Utils.mapBookingEntityToBookingDTOPlusBookedVehicle(booking,true);
             response.setStatusCode(200);
             response.setMessage("successful");
             response.setBooking(bookingDTO);
@@ -125,28 +125,57 @@ public class BookingService implements IBookingService {
         return response;
     }
 
+//    @Override
+//    public Response cancelBooking(Long bookingId) {
+//        Response response = new Response();
+//        try {
+//
+//
+//           bookingRepository.findById(bookingId).orElseThrow(()->new OurException("Booking not Exist"));
+//           bookingRepository.deleteById(bookingId);
+//            response.setStatusCode(200);
+//            response.setMessage("successful");
+//
+//
+//        } catch (OurException e) {
+//            response.setStatusCode(404);
+//            response.setMessage(e.getMessage());
+//
+//        }catch (Exception e) {
+//            response.setStatusCode(500);
+//            response.setMessage("Error Cancelling a Booking"+e.getMessage());
+//        }
+//        return response;
+//    }
     @Override
     public Response cancelBooking(Long bookingId) {
         Response response = new Response();
+
         try {
+            Booking booking = bookingRepository.findById(bookingId)
+                    .orElseThrow(() -> new OurException("Booking does not exist"));
 
+            bookingRepository.delete(booking);
 
-           bookingRepository.findById(bookingId).orElseThrow(()->new OurException("Booking not Exist"));
-           bookingRepository.deleteById(bookingId);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("Booking cancellation successful");
 
+            System.out.println("Booking with ID " + bookingId + " successfully cancelled");
 
         } catch (OurException e) {
             response.setStatusCode(404);
             response.setMessage(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error Cancelling a Booking"+e.getMessage());
+            response.setMessage("Error cancelling booking: " + e.getMessage());
+            System.err.println("Unexpected error: " + e.getMessage());
         }
+
         return response;
     }
+
 
     private boolean vehicleisAvailable(Booking bookingRequest, List<Booking> existingBookings) {
         return existingBookings.stream()

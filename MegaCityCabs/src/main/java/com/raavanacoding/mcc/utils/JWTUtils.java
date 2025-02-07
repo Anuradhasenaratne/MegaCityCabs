@@ -19,35 +19,33 @@ public class JWTUtils {
 
     private final SecretKey key;
     public JWTUtils() {
-        String secretString = "bgU47BMzDGAmIAavweEPJ2EqZg02r3S7";
+        String secretString = "bgU47BMzDGAmIAavweEPJ2EqZg02r3S7666666773357899000088855432244";
         // Remove Base64 decoding since your secret is a raw string
-        byte[] keyBytes = secretString.getBytes(StandardCharsets.UTF_8);
+        byte[] keyBytes = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
+        //byte[] keyBytes = secretString.getBytes(StandardCharsets.UTF_8);
         this.key = new SecretKeySpec(keyBytes, "HmacSHA256");
     }
-//
-//    public  String generateToken(UserDetails userDetails) {
-//        return Jwts.builder()
-//                .subject(userDetails.getUsername())
-//                .issuedAt(new Date(System.currentTimeMillis()))
-//                .expiration(new Date(System.currentTimeMillis() + EXPIRE_TIME))
-//                .signWith(key)
-//                .compact();
-//    }
+
 public String generateToken(UserDetails userDetails) {
     return Jwts.builder()
             .subject(userDetails.getUsername())
-            .claim("authorities", userDetails.getAuthorities())
+            //.claim("authorities", userDetails.getAuthorities())
             .issuedAt(new Date(System.currentTimeMillis()))
             .expiration(new Date(System.currentTimeMillis() + EXPIRE_TIME))
-            .signWith(key, Jwts.SIG.HS256)  // Explicit algorithm specification
+            .signWith(key)  // Explicit algorithm specification
+
             .compact();
 }
     public  String extractUsername(String token) {
         return extractClaims(token, Claims::getSubject);
     }
-    public <T> T extractClaims(String token, Function<Claims, T> claimsTFunction) {
+
+
+    private <T> T extractClaims(String token, Function<Claims, T> claimsTFunction) {
         return claimsTFunction.apply(Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload());
     }
+
+
     public boolean isValidateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

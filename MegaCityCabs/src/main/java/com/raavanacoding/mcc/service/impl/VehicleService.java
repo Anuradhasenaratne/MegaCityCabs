@@ -9,7 +9,7 @@ import com.raavanacoding.mcc.repo.VehicleRepository;
 import com.raavanacoding.mcc.service.AwsS3Service;
 import com.raavanacoding.mcc.service.interfac.IVehicleService;
 import com.raavanacoding.mcc.utils.Utils;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -200,30 +200,54 @@ public class VehicleService implements IVehicleService {
         return response;
     }
 
-    @Override
-    public Response getAvailableVehiclesByDateAndTypes(LocalDate checkInDate, LocalDate checkOutDate, String vehicleType) {
-        Response response = new Response();
-        try {
-
+//    @Override
+//    public Response getAvailableVehiclesByDateAndTypes(LocalDate checkInDate, LocalDate checkOutDate, String vehicleType) {
+//        Response response = new Response();
+//        try {
+//
 //           List<Vehicle> availableVehicle= vehicleRepository.findAvailableVehiclesByDatesAndTypes(checkInDate,checkOutDate,vehicleType);
 //            response.setMessage("successfully");
 //            response.setStatusCode(200);
+//
+//
+//
+//
+//        }catch (OurException e) {
+//
+//            response.setStatusCode(404);
+//            response.setMessage(e.getMessage());
+//
+//        }catch (Exception e) {
+//
+//            response.setStatusCode(500);
+//            response.setMessage("Error get deleteVehicle "+e.getMessage());
+//
+//        }
+//        return response;
+//    }
 
+    @Override
+    public Response getAvailableVehiclesByDateAndTypes(org.joda.time.LocalDate checkInDate, org.joda.time.LocalDate checkOutDate, String vehicleType) {
+        Response response = new Response();
+        try {
+            // Convert Joda-Time LocalDate to Java 8 LocalDate
+            LocalDate convertedCheckInDate = LocalDate.of(checkInDate.getYear(), checkInDate.getMonthOfYear(), checkInDate.getDayOfMonth());
+            LocalDate convertedCheckOutDate = LocalDate.of(checkOutDate.getYear(), checkOutDate.getMonthOfYear(), checkOutDate.getDayOfMonth());
 
+            List<Vehicle> availableVehicle= vehicleRepository.findAvailableVehiclesByDatesAndTypes(convertedCheckInDate, convertedCheckOutDate, vehicleType);
+            List<VehicleDTO> vehicleDTOList=Utils.mapVehicleListEntityToVehicleListDTO(availableVehicle);
+            response.setMessage("Successfully fetched available vehicles");
+            response.setStatusCode(200);
+            response.setVehicleList(vehicleDTOList);
 
-
-        }catch (OurException e) {
-
+        } catch (OurException e) {
             response.setStatusCode(404);
             response.setMessage(e.getMessage());
-
-        }catch (Exception e) {
-
+        } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error get deleteVehicle "+e.getMessage());
-
+            response.setMessage("Error fetching available vehicles: " + e.getMessage());
         }
-        return null;
+        return response;
     }
 
     @Override

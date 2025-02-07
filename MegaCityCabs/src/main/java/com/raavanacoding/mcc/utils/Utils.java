@@ -53,7 +53,7 @@ public class Utils {
         userDTO.setNic(user.getNic());
 
         if (!user.getBookings().isEmpty()) {
-            userDTO.setBookings(user.getBookings().stream().map(booking -> mapBookingEntityToBookingDTOPlusBookedRoom(booking,false)).collect(Collectors.toList()));
+            userDTO.setBookings(user.getBookings().stream().map(booking -> mapBookingEntityToBookingDTOPlusBookedVehicle(booking,false)).collect(Collectors.toList()));
         }
 
 
@@ -61,7 +61,7 @@ public class Utils {
 
     }
 
-    public  static BookingDTO mapBookingEntityToBookingDTOPlusBookedRoom(Booking booking,boolean mapUser) {
+    public  static BookingDTO mapBookingEntityToBookingDTOPlusBookedVehicle(Booking booking,boolean mapUser) {
          BookingDTO bookingDTO = new BookingDTO();
 
         bookingDTO.setId(booking.getId());

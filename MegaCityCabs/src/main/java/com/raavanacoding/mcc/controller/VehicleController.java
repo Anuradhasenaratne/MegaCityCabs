@@ -11,9 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController
@@ -28,7 +31,7 @@ public class VehicleController {
 
 
 
-@GetMapping("/add")
+@PostMapping("/add")
 @PreAuthorize("hasAuthority('ADMIN')")
 public ResponseEntity<Response> addNewVehicle(
         @RequestParam(value = "photo", required = false) MultipartFile photo,
@@ -82,27 +85,54 @@ public ResponseEntity<Response> addNewVehicle(
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-    @GetMapping("/available-vehicles-by-date-and-type")
-    public ResponseEntity<Response> getAvailableVehiclesByDateAndType  (
-            @RequestParam( required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate,
-            @RequestParam( required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate checkOutDate,
-            @RequestParam(required = false)String vehicleType
 
-    ) {
 
-        if(checkInDate ==null
-                || vehicleType == null|| vehicleType.isBlank()
-                || checkOutDate == null
-
-        ) {
-            Response response =new Response();
-            response.setStatusCode(400);
-            response.setMessage("Please fill all the required fields");
-        }
-       // Response response = vehicleService.getAllVehicleTypes(checkInDate,checkOutDate,vehicleType)
-       // return ResponseEntity.status(response.getStatusCode()).body(response);
-        return null;
+//    @GetMapping("/available-vehicles-by-date-and-type")
+//    public ResponseEntity<Response> getAvailableVehiclesByDateAndType(
+//            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) org.joda.time.LocalDate checkInDate,
+//            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) org.joda.time.LocalDate checkOutDate ,
+//            @RequestParam(required = false) String vehicleType
+//    ) {
+//        if (checkInDate == null || checkOutDate == null || vehicleType == null || vehicleType.isBlank()) {
+//            Response response = new Response();
+//            response.setStatusCode(400);
+//           response.setMessage("Please fill all the required fields");
+//            return ResponseEntity.status(response.getStatusCode()).body(response);
+//        }
+//
+//        Response response = vehicleService.getAvailableVehiclesByDateAndTypes( checkInDate, checkOutDate , vehicleType);
+//        return ResponseEntity.status(response.getStatusCode()).body(response);
+//    }
+@GetMapping("/available-vehicles-by-date-and-type")
+public ResponseEntity<Response> getAvailableVehiclesByDateAndType(
+        @RequestParam(required = false) String checkInDate,
+        @RequestParam(required = false) String checkOutDate,
+        @RequestParam(required = false) String vehicleType
+) {
+    if (checkInDate == null || checkOutDate == null || vehicleType == null || vehicleType.isBlank()) {
+        Response response = new Response();
+        response.setStatusCode(400);
+        response.setMessage("Please fill all the required fields");
+        return ResponseEntity.status(400).body(response);
     }
+
+    try {
+        // Convert String to Joda-Time LocalDate
+        LocalDate jodaCheckInDate = LocalDate.parse(checkInDate);
+        LocalDate jodaCheckOutDate = LocalDate.parse(checkOutDate);
+
+        Response response = vehicleService.getAvailableVehiclesByDateAndTypes(jodaCheckInDate, jodaCheckOutDate, vehicleType);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    } catch (Exception e) {
+        Response errorResponse = new Response();
+        errorResponse.setStatusCode(400);
+        errorResponse.setMessage("Invalid date format. Please use YYYY-MM-DD.");
+        return ResponseEntity.status(400).body(errorResponse);
+    }
+}
+
+
+
 
     @PutMapping("/update/{vehicleId}")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -121,7 +151,6 @@ public ResponseEntity<Response> addNewVehicle(
 
 
     @DeleteMapping("/delete/{vehicleId}")
-
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> deleteVehicle(@PathVariable Long vehicleId) {
         Response response =vehicleService.deleteVehicle(vehicleId);
