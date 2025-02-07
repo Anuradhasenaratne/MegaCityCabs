@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./home/HomePage";
+import AllVehicle from "./component/booking_vehicle/AllVehicle";
+import NavBar from "./component/common/NavBar";
+import Footer from "./component/common/Footer";
+import RegisterPage from "./component/auth/RegisterPage";
+import LoginPage from "./component/auth/LoginPage";
+import VehicleDetails from "./component/booking_vehicle/VehicleDetails";
+import ProfilePage from "./component/profile/ProfilePage";
+import EditProfilePage from "./component/profile/EditProfilePage";
+import BookingSummery from "./component/booking_vehicle/BookingSummery";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/AllVehicle" element={<AllVehicle />} />
+        <Route path="/Registerpage" element={<RegisterPage/>} />
+          <Route path="/LoginPage" element={<LoginPage/>} />
+          <Route path="/VehicleDetails/:vehicleId" element={<VehicleDetails />} />
+          <Route path="/profilePage" element={<ProfilePage/>} />
+          <Route path="/EditProfile" element={<EditProfilePage/>} />
+          <Route path="/BookingSummery/:confirmationCode" element={<BookingSummery />} />
 
-export default App
+
+
+      </Routes>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
