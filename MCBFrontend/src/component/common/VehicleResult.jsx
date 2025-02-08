@@ -1,6 +1,7 @@
 
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import { FaCar } from 'react-icons/fa';
 
 const VehicleResult = ({ vehicleSearchResults }) => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const VehicleResult = ({ vehicleSearchResults }) => {
             >
               {/* Image Section */}
               <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2 "> {vehicle.vehicleType} <FaCar className="text-blue-500" size={16} /> </h3>
               <img
                     className="w-full h-full object-cover transition-transform duration-300 transform hover:scale-105"
                     src={vehicle.vehiclePhotoUrl} // Assuming 'vehiclePhotoUrl' is the property for the car image
@@ -26,16 +28,17 @@ const VehicleResult = ({ vehicleSearchResults }) => {
 
               {/* Vehicle Info */}
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{vehicle.vehicleType}</h3>
+                
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>Model / Brand :</strong> {vehicle.vehicleSeats}
+                </p>
                 <p className="text-sm text-gray-600 mb-2">
                   <strong>Price:</strong> ${vehicle.vehiclePrice} / day
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
                   <strong>Model:</strong> {vehicle.vehicleDescription}
                 </p>
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Seats:</strong> {vehicle.vehicleSeats}
-                </p>
+                
                 <p className="text-sm text-gray-600 mb-4">
                   <strong>Transmission:</strong> {vehicle.vehicleTransmission}
                 </p>
@@ -46,7 +49,7 @@ const VehicleResult = ({ vehicleSearchResults }) => {
                 {isAdmin ? (
                   <button
                     className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors"
-                    onClick={() => navigate(`/admin/edit-vehicle/${vehicle.id}`)}
+                    onClick={() => navigate(`/EditVehiclePage/${vehicle.id}`)}
                   >
                     Edit Vehicle
                   </button>

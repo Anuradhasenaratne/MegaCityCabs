@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ApiService from "../../service/ApiService";
 import { jsPDF } from "jspdf"; // Import jsPDF
 import verified_icon from "../../assets/verified_icon.svg";
+import { set } from "date-fns";
 
 const VehicleDetails = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const VehicleDetails = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [confirmationCode, setConfirmationCode] = useState(null);
-  console.log( " top Confirmation Code:", confirmationCode); // Debugging log
+
   const [daycount, setDayCount] = useState(0);
   const [driverCost, setDriverCost] = useState(0);
   const [parDayCost, setPerDayCost] = useState(0);
@@ -28,14 +29,19 @@ const VehicleDetails = () => {
   const [pickUpLocation, setPickUpLocation] = useState("");
   const [dropOffLocation, setDropOffLocation] = useState("");
   const [error, setError] = useState(null); // Track any errors
+ 
+
+ 
 
   const handleCheckboxChange = () => {
-    setIsDriverAdded(!isDriverAdded ? true : false);
+    setIsDriverAdded(!isDriverAdded);
+      
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        
         setIsLoading(true); // Set loading state to true
         const response = await ApiService.getVehicleById(vehicleId);
         setVehicleDetails(response.vehicle);
@@ -81,30 +87,30 @@ const VehicleDetails = () => {
     setTotalPrice(total); // Update total price in state
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
+  // const generatePDF = () => {
+  //   const doc = new jsPDF();
 
-    doc.setFontSize(18);
-    doc.text("Booking Confirmation", 20, 20);
+  //   doc.setFontSize(18);
+  //   doc.text("Booking Confirmation", 20, 20);
 
-    doc.setFontSize(12);
-    doc.text(`Vehicle Type: ${vehicleDetails.vehicleType}`, 20, 40);
-    doc.text(`Vehicle Price per day: $${vehicleDetails.vehiclePrice}`, 20, 50);
-    doc.text(`Pick-up Location: ${pickUpLocation}`, 20, 60);
-    doc.text(`Drop-off Location: ${dropOffLocation}`, 20, 70);
-    doc.text(`Check-in Date: ${checkInDate}`, 20, 80);
-    doc.text(`Check-out Date: ${checkOutDate}`, 20, 90);
-    doc.text(`Total Days: ${daycount}`, 20, 100);
-    doc.text(`Driver Added: ${isDriverAdded ? "Yes" : "No"}`, 20, 110);
-    doc.text(`Total Price: $${totalPrice}`, 20, 120);
+  //   doc.setFontSize(12);
+  //   doc.text(`Vehicle Type: ${vehicleDetails.vehicleType}`, 20, 40);
+  //   doc.text(`Vehicle Price per day: $${vehicleDetails.vehiclePrice}`, 20, 50);
+  //   doc.text(`Pick-up Location: ${pickUpLocation}`, 20, 60);
+  //   doc.text(`Drop-off Location: ${dropOffLocation}`, 20, 70);
+  //   doc.text(`Check-in Date: ${checkInDate}`, 20, 80);
+  //   doc.text(`Check-out Date: ${checkOutDate}`, 20, 90);
+  //   doc.text(`Total Days: ${daycount}`, 20, 100);
+  //   doc.text(`Driver Added: ${isDriverAdded ? "Yes" : "No"}`, 20, 110);
+  //   doc.text(`Total Price: $${totalPrice}`, 20, 120);
 
-    // Add debug log for confirmationCode
-    console.log("Generating PDF with Confirmation Code:", confirmationCode);
+  //   // Add debug log for confirmationCode
+  //   console.log("Generating PDF with Confirmation Code:", confirmationCode);
 
-    doc.text(`Confirmation Code: ${confirmationCode}`, 20, 130); // Ensure confirmationCode is included here
+  //   doc.text(`Confirmation Code: ${confirmationCode}`, 20, 130); // Ensure confirmationCode is included here
 
-    doc.save("booking_confirmation.pdf");
-  };
+  //  // doc.save("booking_confirmation.pdf");
+  // };
 
   const acceptBooking = async () => {
     try {
@@ -126,7 +132,7 @@ const VehicleDetails = () => {
       const booking = {
         checkInDate: formattedCheckInDate,
         checkOutDate: formattedCheckOutDate,
-        isDriverAdded: isDriverAdded ? 1 : 0, // Send 1 if driver is selected, 0 otherwise
+        getDriver: isDriverAdded ? 1 : 0 ,// Convert boolean to 1/0
         pickUpLocation: pickUpLocation,
         dropOffLocation: dropOffLocation,
       };
@@ -141,12 +147,12 @@ const VehicleDetails = () => {
           
         ); // Debugging log
         // Generate and download PDF after successful booking
-        generatePDF(); 
+       // generatePDF(); 
         setShowMessage(true); // Show success message
         setTimeout(() => {
           setShowMessage(false);
-          navigate(`/BookingSummery/${response.bookingConfirmationCode}`, { state: { vehicleDetails, totalPrice } }); // Navigate to summary page after delay
-        }, 10000);
+          navigate(`/BookingSummery/${response.bookingConfirmationCode}`, { state: { vehicleDetails, totalPrice,daycount,isDriverAdded } }); // Navigate to summary page after delay
+        }, 1000);
       }
     } catch (error) {
       setErrorMessage(error.response?.data?.message || error.message);
