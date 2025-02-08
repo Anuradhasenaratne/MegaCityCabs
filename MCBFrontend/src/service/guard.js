@@ -1,25 +1,26 @@
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import ApiService from "./ApiService";
 
-// src/ProtectedRoute.js
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import ApiService from './ApiService';
- 
-
-export const ProtectedRoute = ({ element: Component }) => {
+// ProtectedRoute to check authentication
+export const ProtectedRoute = ({ element }) => {
   const location = useLocation();
   const token = localStorage.getItem("token");
 
-  return token ? Component : <Navigate to="/login" replace state={{ from: location }} />;
+  return token ? (
+    React.createElement(element) // Using React.createElement to render the component
+  ) : (
+    React.createElement(Navigate, { to: "/login", replace: true, state: { from: location } })
+  );
 };
 
-
-
-export const AdminRoute = ({ element: Component }) => {
+// AdminRoute to check if the user is an admin
+export const AdminRoute = ({ element }) => {
   const location = useLocation();
 
   return ApiService.isAdmin() ? (
-    Component
+    React.createElement(element) // Using React.createElement to render the component
   ) : (
-    <Navigate to="/login" replace state={{ from: location }} />
+    React.createElement(Navigate, { to: "/login", replace: true, state: { from: location } })
   );
 };

@@ -113,7 +113,7 @@ const fetchAvailableVehicles = async () => {
                   {isAdmin ? (
                     <button
                       className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors"
-                      onClick={() => navigate(`/admin/edit-vehicle/${car.id}`)}
+                      onClick={() => navigate(`/EditVehiclePage/${car.id}`)}
                     >
                       Edit Vehicle
                     </button>
