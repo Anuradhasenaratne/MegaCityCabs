@@ -9,12 +9,13 @@
 ---
 
 ## 📸 Screenshots  
-| Admin Dashboard | Booking Interface |
-|-----------------|-------------------|
-| ![Admin Dashboard](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/776d7a423afe5f27a70e9cfad69f4b9ef9cfa9fe/welcome%20page.png) | ![Booking](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/client%20booking%20car.png) |   
-| ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   
+| Admin Dashboard | Booking Interface | WelcomeGate |
+|-----------------|-------------------|-------------------|
+| ![Admin Dashboard](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Admin%20pannle.png) | ![Booking](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/client%20booking%20car.png) | ![Regpage](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/regpage.png) |   
 
+| ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   ![login page](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Loginpage.png) |   
 
+| ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   ![login page](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Loginpage.png) |   
 
 ---
 
