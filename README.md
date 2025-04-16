@@ -11,7 +11,9 @@
 ## 📸 Screenshots  
 | Admin Dashboard | Booking Interface |
 |-----------------|-------------------|
-| ![Admin Dashboard](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/776d7a423afe5f27a70e9cfad69f4b9ef9cfa9fe/welcome%20page.png) | ![Booking](https://via.placeholder.com/400x250?text=Booking+Page) |   
+| ![Admin Dashboard](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/776d7a423afe5f27a70e9cfad69f4b9ef9cfa9fe/welcome%20page.png) | ![Booking](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/client%20booking%20car.png) |   
+| ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   
+
 
 *(Replace placeholders with actual screenshots)*  
 
