@@ -15,7 +15,6 @@
 | ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   
 
 
-*(Replace placeholders with actual screenshots)*  
 
 ---
 
