@@ -8,14 +8,15 @@
 
 ---
 
-## 📸 Screenshots  
-| Admin Dashboard | Booking Interface | WelcomeGate |
-|-----------------|-------------------|-------------------|
-| ![Admin Dashboard](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Admin%20pannle.png) | ![Booking](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/client%20booking%20car.png) | ![Regpage](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/regpage.png) |   
+## 📸 Screenshots
 
-| ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   ![login page](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Loginpage.png) |   
+| **Admin Dashboard** | **Booking Interface** | **WelcomeGate (Login & Register)** |
+|---------------------|------------------------|-------------------------------------|
+| ![Admin Dashboard](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Admin%20pannle.png) | ![Booking Page](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/client%20booking%20car.png) | ![Register Page](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/regpage.png) |
 
-| ![Admin Allbookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/admin%20all%20bookin%20view%20page.png) | ![Booking details](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) |   ![login page](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Loginpage.png) |   
+| **Admin – All Bookings** | **Client – Booking Confirmation** | **Login Page** |
+|---------------------------|------------------------------------|----------------|
+| ![All Bookings](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/admin%20all%20bookin%20view%20page.png) | ![Confirm Booking](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/91dc2a9ee26da3e713d3f4b5e3cac20235852186/confiram%20booking%20by%20client.png) | ![Login](https://github.com/Anuradhasenaratne/MegaCityCabs/blob/df634648c03560692b208e72d2b54980d9b32406/Loginpage.png) |
 
 ---
 
